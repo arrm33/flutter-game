@@ -60,6 +60,6 @@ Run the game:
 ### Game :
 ![game](assets/game.png)
 ### O Won :
-![O is win](assets/oIsWin.png)
+![O is win](assets/owon.png)
 ### X Won :
-![X is win](assets/xIsWin.png)
+![X is win](assets/xwon.png)
