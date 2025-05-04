@@ -54,3 +54,12 @@ Run the game:
     Win and Draw detection
 
     Simple and fast gameplay
+
+---
+## Screenshots
+### Game :
+![game](assets/game.png)
+### Game :O is win
+![O is win](assets/oIsWin.png)
+### Game :X is win
+![X is win](assets/xIsWin.png)
