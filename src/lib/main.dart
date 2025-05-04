@@ -12,6 +12,7 @@ class XoGame extends StatelessWidget {
     return MaterialApp(
       title: 'XO Game',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(brightness: Brightness.dark),
       home: GamePage(),
     );
   }
@@ -27,12 +28,16 @@ class _GamePageState extends State<GamePage> {
   String currentPlayer = 'X';
   String winner = '';
   bool gameOver = false;
+  int xWins = 0;
+  int oWins = 0;
+  int draws = 0;
 
   void handleTap(int index) {
     if (board[index] == '' && !gameOver) {
       setState(() {
         board[index] = currentPlayer;
         checkWinner();
+
         if (!gameOver) {
           currentPlayer = currentPlayer == 'X' ? 'O' : 'X';
         }
@@ -60,6 +65,11 @@ class _GamePageState extends State<GamePage> {
         setState(() {
           winner = a;
           gameOver = true;
+
+          if (winner == 'X')
+            xWins++;
+          else if (winner == 'O')
+            oWins++;
         });
         return;
       }
@@ -69,6 +79,7 @@ class _GamePageState extends State<GamePage> {
       setState(() {
         winner = 'tie';
         gameOver = true;
+        draws++;
       });
     }
   }
@@ -87,7 +98,10 @@ class _GamePageState extends State<GamePage> {
       onTap: () => handleTap(index),
       child: Container(
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
+          color: Colors.black54,
+          border: Border.all(color: Colors.white),
+
+          boxShadow: [BoxShadow(color: Colors.pinkAccent, blurRadius: 10)],
         ),
         child: Center(
           child: Text(
@@ -102,27 +116,37 @@ class _GamePageState extends State<GamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('tic tac two')),
+      appBar: AppBar(
+        leading: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Image.asset('assets/icon.png',),
+        ),
+        title: Text('Tic Tac Toe', style: TextStyle(fontWeight: FontWeight.bold)),
+        centerTitle: true,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
             gameOver ? 'Winner: $winner' : 'Turn: $currentPlayer',
-            style: TextStyle(fontSize: 24),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           SizedBox(height: 20),
           GridView.builder(
             shrinkWrap: true,
-            gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+            ),
             itemCount: 9,
             itemBuilder: (context, index) => buildCell(index),
           ),
           SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: resetGame,
-            child: Text('Play Again'),
+          Text(
+            'X wins: $xWins   O wins: $oWins   Draws: $draws',
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
           ),
+          SizedBox(height: 20),
+          ElevatedButton(onPressed: resetGame, child: Text('Play Again')),
         ],
       ),
     );
