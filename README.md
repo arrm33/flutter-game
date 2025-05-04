@@ -1,5 +1,4 @@
-# flutter-game
-# ❌⭕ XO Game (Tic Tac Toe) – Flutter & Dart Console
+# Tic Tac Toe – Flutter & Dart Console
 
 This repository contains two versions of a simple **Tic Tac Toe (XO)** game:
 
