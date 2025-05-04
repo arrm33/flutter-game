@@ -59,7 +59,7 @@ Run the game:
 ## Screenshots
 ### Game :
 ![game](assets/game.png)
-### O is win :
+### O Won :
 ![O is win](assets/oIsWin.png)
-### X is win :
+### X Won :
 ![X is win](assets/xIsWin.png)
